@@ -2,6 +2,9 @@
 
 This small project it's a Gatsby plugin that fetches user articles from Dev.to’s `/articles?username` combined with `/articles/${id}` endpoint.
 
+**Note:** There is an alternative plugin called `gatsby-source-dev` that achieves the same functionality, but it has unnecessary dependencies and no updates for almost 4 years.
+
+
 ## Usage
 
 Install `gatsby-plugin-dev-community` in your project:
