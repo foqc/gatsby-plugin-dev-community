@@ -1,6 +1,6 @@
 # gatsby-plugin-dev-community
 
-This mall project it's a Gatsby plugin that fetches user articles from Dev.to’s `/articles?username` combined with `/articles/${id}` endpoint.
+This small project it's a Gatsby plugin that fetches user articles from Dev.to’s `/articles?username` combined with `/articles/${id}` endpoint.
 
 ## Usage
 
@@ -15,15 +15,14 @@ Then add the plugin to your `gatsby-config.js` file:
 
 ```js
 {
-  resolve: "gatsby-source-dev",
+  resolve: "gatsby-plugin-dev-community",
   options: {
-    // This is your username on Dev.to
-    username: ''
+    username: 'userDevCommunity'  // This is your username on Dev.to
   }
 }
 ```
 
-The plugin will store the Dev.to API response in Gatsby. Here's an example of a query that fetches an articles `title`, `id`, and `description`.
+This plugin retrieves data from the Dev.to API and stores it in Gatsby. It includes a sample query that fetches article information such as `title`, `id`, and `description`.
 
 ```js
 {
@@ -40,7 +39,3 @@ The plugin will store the Dev.to API response in Gatsby. Here's an example of a 
   }
 }
 ```
-
-The node contains the entire response from Dev.to’s endpoint.
-
-> Pagination is not yet implemented
