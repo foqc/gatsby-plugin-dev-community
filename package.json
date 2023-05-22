@@ -4,9 +4,7 @@
   "description": "This project it's a Gatsby plugin that fetches user articles from Dev community.",
   "main": "index.js",
   "scripts": {
-    "build": "npm run build:types && npm run build:js",
-    "build:types": "tsc",
-    "build:js": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline"
+    "build": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline"
   },
   "keywords": [
     "gatsby",
