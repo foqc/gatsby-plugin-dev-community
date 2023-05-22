@@ -7,11 +7,8 @@
   "scripts": {
     "build": "tsc",
     "clean": "rm -rf lib",
-    "prepublish": "npm run clean && npm run build && cp ./package.json ./README.md ./.npmrc lib",
+    "prepublish": "npm run build && cp ./package.json ./README.md ./.npmrc lib",
     "publish": "cd lib && npm publish"
-  },
-  "publishConfig": {
-    "@foqc:registry": "https://npm.pkg.github.com"
   },
   "keywords": [
     "gatsby",

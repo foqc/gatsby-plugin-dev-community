@@ -21,4 +21,4 @@ jobs:
       - run: npm i
       - run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{secrets.ADMIN_GITHUB_TOKEN}}
+          NODE_AUTH_TOKEN: ${{secrets.NPM_GITHUB_TOKEN}}
