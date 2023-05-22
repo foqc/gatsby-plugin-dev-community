@@ -1,8 +1,12 @@
 export type Article = {
   [key: string]: object;
 };
-export const sourceNodes = async ({ actions, username, createNodeId, createContentDigest }) => {
+export const sourceNodes = async ({ actions, createNodeId, createContentDigest }, { username }) => {
   const { createNode } = actions;
+
+  if (!actions || !createNodeId || !createContentDigest) {
+    throw Error('`Gatsby` environment not initialized correctly.');
+  }
 
   if (!username) {
     throw Error('No `username` provided to `gatsby-plugin-dev-community`');
