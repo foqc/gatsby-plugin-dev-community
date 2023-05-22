@@ -4,7 +4,8 @@
   "description": "This project it's a Gatsby plugin that fetches user articles from Dev community.",
   "main": "index.js",
   "scripts": {
-    "build": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline"
+    "build": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline",
+    "release": "np"
   },
   "keywords": [
     "gatsby",
@@ -14,6 +15,10 @@
   "author": "Fabian Quijosaca",
   "license": "ISC",
   "repository": "https://github.com/foqc/gatsby-plugin-dev-community",
+  "bugs": {
+    "url": "https://github.com/foqc/gatsby-plugin-dev-community/issues"
+  },
+  "homepage": "https://github.com/foqc/gatsby-plugin-dev-community#readme",
   "devDependencies": {
     "@babel/cli": "^7.21.5",
     "@babel/core": "^7.21.8",
