@@ -1,6 +1,6 @@
 {
   "name": "gatsby-plugin-dev-community",
-  "version": "1.0.6",
+  "version": "1.0.1",
   "description": "This project it's a Gatsby plugin that fetches user articles from Dev community.",
   "main": "lib/gatsby-node.js",
   "types": "lib/gatsby-node.d.ts",
@@ -11,7 +11,7 @@
     "publish": "cd lib && npm publish"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/foqc"
+    "@foqc:registry": "https://npm.pkg.github.com"
   },
   "keywords": [
     "gatsby",
