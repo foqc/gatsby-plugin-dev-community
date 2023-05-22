@@ -4,8 +4,8 @@
   "description": "This project it's a Gatsby plugin that fetches user articles from Dev community.",
   "main": "index.js",
   "scripts": {
-    "build": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline",
-    "release": "np"
+    "clean": "rimraf lib",
+    "build2": "npm run clean && tsc --outDir lib"
   },
   "keywords": [
     "gatsby",
@@ -20,11 +20,6 @@
   },
   "homepage": "https://github.com/foqc/gatsby-plugin-dev-community#readme",
   "devDependencies": {
-    "@babel/cli": "^7.21.5",
-    "@babel/core": "^7.21.8",
-    "@babel/preset-env": "^7.21.5",
-    "@babel/preset-typescript": "^7.21.5",
-    "np": "^7.7.0",
     "typescript": "^5.0.4"
   }
 }
