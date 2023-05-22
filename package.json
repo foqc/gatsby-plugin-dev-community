@@ -2,8 +2,8 @@
   "name": "gatsby-plugin-dev-community",
   "version": "1.0.0",
   "description": "This project it's a Gatsby plugin that fetches user articles from Dev community.",
-  "main": "gatsby-node.js",
-  "types": "gatsby-node.d.ts",
+  "main": "lib/gatsby-node.js",
+  "types": "lib/gatsby-node.d.ts",
   "scripts": {
     "build": "tsc"
   },
