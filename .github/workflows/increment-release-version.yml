@@ -25,4 +25,4 @@ jobs:
           git config --local user.email 41898282+github-actions[bot]@users.noreply.github.com
           git config --local user.name "GitHub Action"
           npm version patch -m "[RELEASE] %s"
-          git push https://${{ secrets.ADMIN_GITHUB_TOKEN }}@github.com/foqc/gatsby-plugin-dev-community HEAD:master --follow-tags
+          git push https://${{ secrets.ADMIN_GITHUB_TOKEN }}@github.com/foqc/gatsby-plugin-dev-community HEAD:main --follow-tags
