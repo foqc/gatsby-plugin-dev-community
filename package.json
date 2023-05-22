@@ -1,0 +1,22 @@
+{
+  "name": "gatsby-plugin-dev-community",
+  "version": "1.0.0",
+  "description": "This project it's a Gatsby plugin that fetches user articles from Dev community.",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test:eslint && npm test:prettier",
+    "prepublishOnly": "babel src --out-dir . --source-maps"
+  },
+  "keywords": [
+    "gatsby",
+    "dev.to",
+    "gatsby-plugin"
+  ],
+  "author": "Fabian Quijosaca",
+  "license": "ISC",
+  "repository": "https://github.com/foqc/gatsby-plugin-dev-community",
+  "devDependencies": {
+    "@babel/preset-typescript": "^7.21.5",
+    "np": "^7.7.0"
+  }
+}
