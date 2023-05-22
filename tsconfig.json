@@ -1,13 +1,15 @@
 {
   "compilerOptions": {
-    "target": "esnext",
+    "experimentalDecorators": true,
+    "target": "es6",
+    "lib": ["es2020", "DOM", "dom.iterable"],
+    "downlevelIteration": true,
+    "module": "esnext",
     "moduleResolution": "node",
-    "allowJs": true,
-    "strict": true,
-    "esModuleInterop": true,
-    "declaration": true,
-    "emitDeclarationOnly": true,
-    "isolatedModules": true
+    "pretty": true,
+    "resolveJsonModule": true,
+    "strictNullChecks": true,
+    "allowSyntheticDefaultImports": true
   },
-  "include": ["src"]
+  "include": ["src/**/*", "node_modules/reflect-metadata/Reflect.js"]
 }
