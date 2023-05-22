@@ -4,7 +4,7 @@
   "description": "This project it's a Gatsby plugin that fetches user articles from Dev community.",
   "main": "index.js",
   "scripts": {
-    "build": "tsc --outDir lib"
+    "build": "tsc"
   },
   "keywords": [
     "gatsby",

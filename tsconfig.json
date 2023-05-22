@@ -1,15 +1,15 @@
 {
   "compilerOptions": {
-    "experimentalDecorators": true,
-    "target": "es6",
+    "target": "ES2018",
     "lib": ["es2020", "DOM", "dom.iterable"],
-    "downlevelIteration": true,
-    "module": "esnext",
+    "module": "commonjs",
     "moduleResolution": "node",
-    "pretty": true,
+    "allowJs": true,
+    "declaration": true,
+    "outDir": "./lib",
+    "esModuleInterop": true,
     "resolveJsonModule": true,
-    "strictNullChecks": true,
-    "allowSyntheticDefaultImports": true
-  },
-  "include": ["src/**/*"]
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  }
 }
