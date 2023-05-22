@@ -11,5 +11,5 @@
     "strictNullChecks": true,
     "allowSyntheticDefaultImports": true
   },
-  "include": ["src/**/*", "node_modules/reflect-metadata/Reflect.js"]
+  "include": ["src/**/*"]
 }
