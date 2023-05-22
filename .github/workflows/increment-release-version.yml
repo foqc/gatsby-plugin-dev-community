@@ -1,0 +1,28 @@
+name: Version Increment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  version:
+    runs-on: ubuntu-latest
+    if: "!startsWith(github.event.head_commit.message, '[RELEASE]')"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.ADMIN_GITHUB_TOKEN }}
+
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+
+      - name: 'Update gatsby-plugin-dev-community patch version'
+        run: |
+          git config --local user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git config --local user.name "GitHub Action"
+          npm version patch -m "[RELEASE] %s"
+          git push https://${{ secrets.ADMIN_GITHUB_TOKEN }}@github.com/foqc/gatsby-plugin-dev-community HEAD:master --follow-tags
