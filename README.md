@@ -4,6 +4,9 @@ This small project it's a Gatsby plugin that fetches user articles from Dev.toâ€
 
 **Note:** There is an alternative plugin called [gatsby-source-dev](https://github.com/geocine/gatsby-source-dev) that achieves the same functionality, but it has unnecessary dependencies and hasn't received recent updates.
 
+[![NPM version](https://badgen.net/npm/v/gatsby-plugin-dev-community)](https://www.npmjs.com/package/gatsby-plugin-dev-community)
+
+[![main workflow](https://github.com/github/docs/actions/workflows/main.yml/badge.svg)](https://github.com/foqc/gatsby-plugin-dev-community/actions)
 
 ## Usage
 
