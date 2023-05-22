@@ -3,3 +3,4 @@ lib/
 package-lock.json
 gatsby-node.d.ts
 gatsby-node.js
+.github/
