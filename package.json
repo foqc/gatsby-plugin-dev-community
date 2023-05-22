@@ -12,7 +12,7 @@
     "gatsby-plugin"
   ],
   "author": "Fabian Quijosaca",
-  "license": "ISC",
+  "license": "MIT",
   "repository": "https://github.com/foqc/gatsby-plugin-dev-community",
   "bugs": {
     "url": "https://github.com/foqc/gatsby-plugin-dev-community/issues"
