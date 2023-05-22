@@ -10,9 +10,6 @@
     "prepublish": "npm run clean && npm run build && cp ./package.json ./README.md lib",
     "publish": "cd lib && npm publish"
   },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/foqc"
-  },
   "keywords": [
     "gatsby",
     "dev.to",
