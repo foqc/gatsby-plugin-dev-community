@@ -1,4 +1,4 @@
-type Article = {
+export type Article = {
   [key: string]: object;
 };
 export const sourceNodes = async ({ actions, username, createNodeId, createContentDigest }) => {
