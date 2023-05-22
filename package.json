@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "clean": "rimraf lib",
-    "build2": "npm run clean && tsc --outDir lib"
+    "build": "npm run clean && tsc --outDir lib"
   },
   "keywords": [
     "gatsby",
