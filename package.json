@@ -7,8 +7,8 @@
   "scripts": {
     "build": "tsc",
     "clean": "rm -rf lib",
-    "prepublish": "npm run build && cp ./package.json ./README.md lib",
-    "publish": "npm run clean && cd lib && npm publish"
+    "prepublish": "npm run clean && npm run build && cp ./package.json ./README.md lib",
+    "publish": "cd lib && npm publish"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/foqc"
