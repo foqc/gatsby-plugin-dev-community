@@ -11,7 +11,7 @@
     "publish": "cd lib && npm publish"
   },
   "publishConfig": {
-    "@foqc:registry": "https://npm.pkg.github.com"
+    "registry": "https://npm.pkg.github.com/foqc"
   },
   "keywords": [
     "gatsby",
