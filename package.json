@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc",
     "clean": "rm -rf lib",
-    "prepublish": "npm run build && cp ./package.json ./README.md ./.npmrc lib",
+    "prepublish": "npm run build && cp ./package.json ./README.md lib",
     "publish": "cd lib && npm publish"
   },
   "keywords": [
