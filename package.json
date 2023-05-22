@@ -4,8 +4,7 @@
   "description": "This project it's a Gatsby plugin that fetches user articles from Dev community.",
   "main": "index.js",
   "scripts": {
-    "clean": "rimraf lib",
-    "build": "npm run clean && tsc --outDir lib"
+    "build": "tsc --outDir lib"
   },
   "keywords": [
     "gatsby",
