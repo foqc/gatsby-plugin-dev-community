@@ -68,7 +68,7 @@ const getAllArticleIdsByUser = async (
   return allArticlesIds;
 };
 
-const getArticlesData = async (articleIds: number[]): Promise<DevArticleType[]> => {
+const getArticlesDetailByIds = async (articleIds: number[]): Promise<DevArticleType[]> => {
   const articlesPromise: Promise<DevArticleType>[] = articleIds.map((id) =>
     fetch(`https://dev.to/api/articles/${id}`).then((result) => result.json())
   );
@@ -91,7 +91,7 @@ export const sourceNodes = async (
   }
 
   const articleIds = await getAllArticleIdsByUser(username, page, perPage);
-  const articles = await getArticlesData(articleIds);
+  const articles = await getArticlesDetailByIds(articleIds);
   articles.forEach((article: DevArticleType) => {
     const gatsbyNode = {
       article,
