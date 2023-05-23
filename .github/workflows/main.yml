@@ -18,7 +18,7 @@ jobs:
         with:
           node-version: 18.x
           registry-url: https://registry.npmjs.org/
-      - run: npm install
+      - run: npm i
       - run: npm run prepublish
       - run: cd lib && npm publish
         env:
