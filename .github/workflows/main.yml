@@ -20,6 +20,7 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - run: npm i
       - run: npm run prepublish
+      - run: cd lib
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_GITHUB_TOKEN}}
