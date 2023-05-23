@@ -22,7 +22,9 @@ Then add the plugin to your `gatsby-config.js` file:
 {
   resolve: "gatsby-plugin-dev-community",
   options: {
-    username: 'userDevCommunity'  // This is your username on Dev.to
+    username: 'userDevCommunity',  // This is your username on Dev.to
+    perPage: '50', // Page size (the number of items to return per page 1 ... 1000). By default is 30
+    page: '1' //Pagination page. By default is 1
   }
 }
 ```
