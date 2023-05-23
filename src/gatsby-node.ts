@@ -51,7 +51,7 @@ export const sourceNodes = async ({ actions, createNodeId, createContentDigest }
     throw Error('No `username` provided to `gatsby-plugin-dev-community`');
   }
 
-  const response = await fetch(`https://dev.to/api/articles?username=${username}`);
+  const response = await fetch(`https://dev.to/api/articles?username=${username}&per_page=100`);
   const data = await response.json();
   const articlesPromise: Promise<DevArticleType>[] = data.map(({ id }) =>
     fetch(`https://dev.to/api/articles/${id}`).then((result) => result.json())
