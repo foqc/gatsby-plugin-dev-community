@@ -1,6 +1,6 @@
 # gatsby-plugin-dev-community
 
-This small project it's a Gatsby plugin that fetches user articles from Dev.to’s `/articles?username` combined with `/articles/${id}` endpoint.
+This small project it's a Gatsby plugin that fetches user articles from [Dev.to’s API](https://developers.forem.com/api/v0#tag/articles/operation/getArticles) `/articles?username` combined with `/articles/${id}` endpoint.
 
 **Note:** There is an alternative plugin called [gatsby-source-dev](https://github.com/geocine/gatsby-source-dev) that achieves the same functionality, but it has unnecessary dependencies and hasn't received recent updates.
 
