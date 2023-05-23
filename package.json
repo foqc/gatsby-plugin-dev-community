@@ -1,14 +1,13 @@
 {
   "name": "gatsby-plugin-dev-community",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "This project it's a Gatsby plugin that fetches user articles from Dev community.",
   "main": "lib/gatsby-node.js",
   "types": "lib/gatsby-node.d.ts",
   "scripts": {
     "build": "tsc",
     "clean": "rm -rf lib",
-    "prepublish": "npm run build && cp ./package.json ./README.md lib",
-    "publish": "npm publish"
+    "prepublish": "npm run build && cp ./package.json ./README.md lib && cd lib"
   },
   "keywords": [
     "gatsby",
