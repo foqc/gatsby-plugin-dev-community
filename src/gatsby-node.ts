@@ -40,7 +40,46 @@ export type DevArticleType = {
     profile_image_90: string;
   };
 };
-export const sourceNodes = async ({ actions, createNodeId, createContentDigest }, { username }) => {
+
+const getArticleIdsByPage = async (searchParams: string): Promise<number[]> => {
+  const response = await fetch(`https://dev.to/api/articles?${searchParams}`);
+  const data = await response.json();
+  return data.map(({ id }) => id);
+};
+
+const getAllArticleIdsByUser = async (
+  username: string,
+  page: number = 1,
+  perPage: number = 30
+): Promise<number[]> => {
+  const searchParams = new URLSearchParams({ username, page: `${page}`, per_page: `${perPage}` });
+
+  let allArticlesIds: number[] = [];
+  let pageParam = page;
+  let hasMorePage = true;
+  while (hasMorePage) {
+    searchParams.set('page', `${pageParam}`);
+    const articleIds: number[] = await getArticleIdsByPage(searchParams.toString());
+    hasMorePage = !!articleIds.length;
+    allArticlesIds = [...allArticlesIds, ...articleIds];
+    pageParam++;
+  }
+
+  return allArticlesIds;
+};
+
+const getArticlesData = async (articleIds: number[]): Promise<DevArticleType[]> => {
+  const articlesPromise: Promise<DevArticleType>[] = articleIds.map((id) =>
+    fetch(`https://dev.to/api/articles/${id}`).then((result) => result.json())
+  );
+
+  const articles: DevArticleType[] = await Promise.all(articlesPromise);
+  return articles;
+};
+export const sourceNodes = async (
+  { actions, createNodeId, createContentDigest },
+  { username, perPage, page }
+) => {
   const { createNode } = actions;
 
   if (!actions || !createNodeId || !createContentDigest) {
@@ -51,13 +90,8 @@ export const sourceNodes = async ({ actions, createNodeId, createContentDigest }
     throw Error('No `username` provided to `gatsby-plugin-dev-community`');
   }
 
-  const response = await fetch(`https://dev.to/api/articles?username=${username}&per_page=100`);
-  const data = await response.json();
-  const articlesPromise: Promise<DevArticleType>[] = data.map(({ id }) =>
-    fetch(`https://dev.to/api/articles/${id}`).then((result) => result.json())
-  );
-
-  const articles: DevArticleType[] = await Promise.all(articlesPromise);
+  const articleIds = await getAllArticleIdsByUser(username, page, perPage);
+  const articles = await getArticlesData(articleIds);
   articles.forEach((article: DevArticleType) => {
     const gatsbyNode = {
       article,
