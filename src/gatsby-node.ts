@@ -69,12 +69,12 @@ const getAllArticleIdsByUser = async (
 };
 
 const getArticlesDetailByIds = async (articleIds: number[]): Promise<DevArticleType[]> => {
-  const articlesPromise = articleIds.map(async (id) => {
-    const response = await fetch(`https://dev.to/api/articles/${id}`);
-    return response.json();
-  });
+  const articlesPromise = articleIds.map((id) => fetch(`https://dev.to/api/articles/${id}`));
+  const resolvedArticles = await Promise.all(articlesPromise);
+  const articles: DevArticleType[] = await Promise.all(
+    resolvedArticles.map((response) => response.json())
+  );
 
-  const articles: DevArticleType[] = await Promise.all(articlesPromise);
   return articles;
 };
 
