@@ -69,11 +69,18 @@ const getAllArticleIdsByUser = async (
 };
 
 const getArticlesDetailByIds = async (articleIds: number[]): Promise<DevArticleType[]> => {
-  const articlesPromise = articleIds.map((id) => fetch(`https://dev.to/api/articles/${id}`));
-  const resolvedArticles = await Promise.all(articlesPromise);
-  const articles: DevArticleType[] = await Promise.all(
-    resolvedArticles.map((response) => response.json())
+  const articlesPromise = articleIds.map((id) =>
+    fetch(`https://dev.to/api/articles/${id}`).then((response) => {
+      if (!response.ok) {
+        throw Error(
+          `Error fetching article ${id} please try again later. Status: ${response.status} - ${response.statusText}`
+        );
+      }
+      return response.json();
+    })
   );
+
+  const articles: DevArticleType[] = await Promise.all<DevArticleType>(articlesPromise);
 
   return articles;
 };
