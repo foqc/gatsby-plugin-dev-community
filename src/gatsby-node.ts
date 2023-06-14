@@ -42,9 +42,16 @@ export type DevArticleType = {
 };
 
 const getArticleIdsByPage = async (searchParams: string): Promise<number[]> => {
-  const response = await fetch(`https://dev.to/api/articles?${searchParams}`);
-  const data = await response.json();
-  return data.map(({ id }) => id);
+  try {
+    const response = await fetch(`https://dev.to/api/articles?${searchParams}`);
+    if (!response.ok) {
+      throw Error(`Error fetching articles ${searchParams}. Status: ${response.statusText}`);
+    }
+    const data = await response.json();
+    return data.map(({ id }) => id);
+  } catch (error) {
+    throw Error(`Error ${error}`);
+  }
 };
 
 const getAllArticleIdsByUser = async (
