@@ -50,7 +50,7 @@ const getArticleIdsByPage = async (searchParams: string): Promise<number[]> => {
     const data = await response.json();
     return data.map(({ id }) => id);
   } catch (error) {
-    throw Error(`Error ${error}`);
+    throw error;
   }
 };
 
