@@ -79,13 +79,13 @@ const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const getDetailById = async (
   id: number,
-  batchSize: number,
+  batchLength: number,
   batchIndex: number
 ): Promise<DevArticleType> =>
   fetch(`https://dev.to/api/articles/${id}`).then((response) => {
     if (!response.ok) {
       throw Error(
-        `[${batchIndex}/${batchSize}] Error fetching article ${id} please try again later. Status: ${response.status} - ${response.statusText}`
+        `[${batchIndex}/${batchLength}] Error fetching article ${id} please try again later. Status: ${response.status} - ${response.statusText}`
       );
     }
     return response.json();
@@ -93,18 +93,19 @@ const getDetailById = async (
 
 export const getArticlesDetailByIds = async (
   articleIds: number[],
-  batchSize: number,
-  sleepTime: number
+  batchSize: number = 3,
+  sleepTime: number = 3000
 ): Promise<DevArticleType[]> => {
   const batches = Math.ceil(articleIds.length / batchSize);
   const articles: DevArticleType[] = [];
 
   for (let i = 0; i < batches; i++) {
     const batch = articleIds.slice(i * batchSize, (i + 1) * batchSize);
-    const batchPromise = batch.map((id) => getDetailById(id, batchSize, i + 1));
+    const batchPromise = batch.map((id) => getDetailById(id, batches, i + 1));
     const batchArticles = await Promise.all<DevArticleType>(batchPromise);
     articles.push(...batchArticles);
 
+    console.debug(`[${i + 1}/${batches}] batch fetched successfully`);
     if (i < batches - 1) {
       await sleep(sleepTime);
     }
@@ -115,7 +116,7 @@ export const getArticlesDetailByIds = async (
 
 export const sourceNodes = async (
   { actions, createNodeId, createContentDigest },
-  { username, perPage, page, batchSize = 3, sleepTime = 3000 }
+  { username, perPage, page, batchSize, sleepTime }
 ) => {
   const { createNode } = actions;
 
@@ -127,8 +128,8 @@ export const sourceNodes = async (
     throw Error('No `username` provided to `gatsby-plugin-dev-community`');
   }
 
-  if (batchSize > 30 || batchSize < 1) {
-    throw Error('Batch size cannot be greater than 30 or less than 1');
+  if (batchSize < 1 || batchSize > 30) {
+    throw Error('Batch size cannot be less than 1 or greater than 30');
   }
 
   if (sleepTime < 0 || sleepTime > 10000) {
