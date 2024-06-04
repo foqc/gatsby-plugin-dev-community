@@ -22,9 +22,11 @@ Then add the plugin to your `gatsby-config.js` file:
 {
   resolve: "gatsby-plugin-dev-community",
   options: {
-    username: 'userDevCommunity',  // This is your username on Dev.to
-    perPage: '50', // Page size (the number of items to return per page 1 ... 1000). By default is 30
-    page: '1' //Pagination page. By default is 1
+    username: 'userDevCommunity',  //[Required] This is your username on Dev.to
+    perPage: '50', //[Optional] Page size (the number of items to return per page 1 ... 1000). By default is 30
+    page: '1', //[Optional] Pagination page. By default is 1
+    batchSize: '3', //[Optional] To prevent 429 [Too Many Requests] errors from the server, we limit the number of requests sent in each batch. By default is 3
+    sleepTime: '3000', // [Optional] To prevent 429 [Too Many Requests] errors from the server, we wait for a specified number of milliseconds after each batch request. The default is 3000 milliseconds.
   }
 }
 ```
@@ -58,8 +60,8 @@ Available properties in articles
   cover_image: string;
   readable_publish_date: string;
   social_image: string;
-  tag_list: string[];
-  tags: string;
+  tag_list: string;
+  tags: string[];
   slug: string;
   path: string;
   url: string;

@@ -6,8 +6,8 @@ export type DevArticleType = {
   cover_image: string;
   readable_publish_date: string;
   social_image: string;
-  tag_list: string[];
-  tags: string;
+  tag_list: string;
+  tags: string[];
   slug: string;
   path: string;
   url: string;
@@ -75,26 +75,47 @@ const getAllArticleIdsByUser = async (
   return allArticlesIds;
 };
 
-const getArticlesDetailByIds = async (articleIds: number[]): Promise<DevArticleType[]> => {
-  const articlesPromise = articleIds.map((id) =>
-    fetch(`https://dev.to/api/articles/${id}`).then((response) => {
-      if (!response.ok) {
-        throw Error(
-          `Error fetching article ${id} please try again later. Status: ${response.status} - ${response.statusText}`
-        );
-      }
-      return response.json();
-    })
-  );
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-  const articles: DevArticleType[] = await Promise.all<DevArticleType>(articlesPromise);
+const getDetailById = async (
+  id: number,
+  batchSize: number,
+  batchIndex: number
+): Promise<DevArticleType> =>
+  fetch(`https://dev.to/api/articles/${id}`).then((response) => {
+    if (!response.ok) {
+      throw Error(
+        `[${batchIndex}/${batchSize}] Error fetching article ${id} please try again later. Status: ${response.status} - ${response.statusText}`
+      );
+    }
+    return response.json();
+  });
+
+export const getArticlesDetailByIds = async (
+  articleIds: number[],
+  batchSize: number,
+  sleepTime: number
+): Promise<DevArticleType[]> => {
+  const batches = Math.ceil(articleIds.length / batchSize);
+  const articles: DevArticleType[] = [];
+
+  for (let i = 0; i < batches; i++) {
+    const batch = articleIds.slice(i * batchSize, (i + 1) * batchSize);
+    const batchPromise = batch.map((id) => getDetailById(id, batchSize, i + 1));
+    const batchArticles = await Promise.all<DevArticleType>(batchPromise);
+    articles.push(...batchArticles);
+
+    if (i < batches - 1) {
+      await sleep(sleepTime);
+    }
+  }
 
   return articles;
 };
 
 export const sourceNodes = async (
   { actions, createNodeId, createContentDigest },
-  { username, perPage, page }
+  { username, perPage, page, batchSize = 3, sleepTime = 3000 }
 ) => {
   const { createNode } = actions;
 
@@ -106,8 +127,16 @@ export const sourceNodes = async (
     throw Error('No `username` provided to `gatsby-plugin-dev-community`');
   }
 
+  if (batchSize > 30 || batchSize < 1) {
+    throw Error('Batch size cannot be greater than 30 or less than 1');
+  }
+
+  if (sleepTime < 0 || sleepTime > 10000) {
+    throw Error('Sleep time cannot be less than 0 or greater than 10000');
+  }
+
   const articleIds = await getAllArticleIdsByUser(username, page, perPage);
-  const articles = await getArticlesDetailByIds(articleIds);
+  const articles = await getArticlesDetailByIds(articleIds, batchSize, sleepTime);
   articles.forEach((article: DevArticleType) => {
     const gatsbyNode = {
       article,
