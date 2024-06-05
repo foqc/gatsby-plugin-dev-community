@@ -91,7 +91,7 @@ const getDetailById = async (
     return response.json();
   });
 
-export const getArticlesDetailByIds = async (
+const getArticlesDetailByIds = async (
   articleIds: number[],
   batchSize: number = 3,
   sleepTime: number = 3000
